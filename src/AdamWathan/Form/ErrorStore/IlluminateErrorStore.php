@@ -49,4 +49,15 @@ class IlluminateErrorStore implements ErrorStoreInterface
     {
         return str_replace(['.', '[]', '[', ']'], ['_', '', '.', ''], $key);
     }
+
+    public function hasAnyError($key)
+    {
+        if (! $this->hasErrors()) {
+            return false;
+        }
+
+        $key = $this->transformKey($key);
+
+        return $this->getErrors()->hasAny($key);
+    }
 }
