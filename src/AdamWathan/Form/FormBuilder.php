@@ -22,12 +22,21 @@ use AdamWathan\Form\OldInput\OldInputInterface;
 
 class FormBuilder
 {
+    /**
+     * @var OldInputInterface
+     */
     protected $oldInput;
 
+    /**
+     * @var ErrorStoreInterface
+     */
     protected $errorStore;
 
     protected $csrfToken;
 
+    /**
+     * @var BoundData
+     */
     protected $boundData;
 
     public function setOldInputProvider(OldInputInterface $oldInputProvider)
@@ -218,6 +227,15 @@ class FormBuilder
         }
 
         return $this->errorStore->hasError($name);
+    }
+
+    public function hasAnyError($name)
+    {
+        if (! isset($this->errorStore)) {
+            return false;
+        }
+
+        return $this->errorStore->hasAnyError($name);
     }
 
     public function getError($name, $format = null)
