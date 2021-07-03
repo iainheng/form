@@ -53,7 +53,7 @@ class BoundData
             return $default;
         }
 
-        return $this->dataGet($target[$key], $keyParts, $default);
+        return $this->dataGet(data_get($target, $key), $keyParts, $default);
     }
 
     protected function objectGet($target, $keyParts, $default)
@@ -64,7 +64,7 @@ class BoundData
             return $default;
         }
 
-        return $this->dataGet($target->{$key}, $keyParts, $default);
+        return $this->dataGet(data_get($target, $key), $keyParts, $default);
     }
 
     protected function transformKey($key)
